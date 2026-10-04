@@ -559,6 +559,8 @@ button:focus-visible {
         padding-inline: 0.5rem;
     }
     #hero .brutal-btn {
+        display: flex;
+        align-items: center;
         width: 100%;
         justify-content: center;
     }
