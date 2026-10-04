@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash-screen');
     if (splash) {
         setTimeout(() => {
+            document.body.classList.add('intro-started');
             splash.classList.add('hidden');
         }, 1800);
-        // Remove from DOM after transition
-        splash.addEventListener('transitionend', () => {
-            splash.remove();
+        splash.addEventListener('transitionend', event => {
+            if (event.propertyName === 'opacity') splash.remove();
         });
+    } else {
+        document.body.classList.add('intro-started');
     }
 
     // ---- Mobile Menu Toggle ----
@@ -64,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Scroll Reveal (IntersectionObserver) ----
     const revealElements = document.querySelectorAll('.scroll-reveal');
-    const fadeInElements = document.querySelectorAll('.fade-in-up');
     const skillCards = document.querySelectorAll('.skill-card-stagger');
     const stepCards = document.querySelectorAll('.step-card');
     const diseaseCards = document.querySelectorAll('.disease-card');
@@ -74,62 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -60px 0px'
     };
 
-    // The hero uses CSS keyframe animations rather than the .revealed class.
-    // Remove the class out of view so the animation can replay on re-entry.
-    const fadeInOutsideViewport = new WeakSet();
-    const fadeInObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (fadeInOutsideViewport.has(entry.target)) {
-                    entry.target.classList.add('fade-in-up');
-                    fadeInOutsideViewport.delete(entry.target);
-                }
-            } else {
-                entry.target.classList.remove('fade-in-up');
-                fadeInOutsideViewport.add(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    fadeInElements.forEach(element => fadeInObserver.observe(element));
-
-    function observeReplay(elements, options, getDelay = () => 0) {
-        const pendingTimers = new WeakMap();
+    function observeOnce(elements, options, getDelay = () => 0) {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                const element = entry.target;
-                clearTimeout(pendingTimers.get(element));
-
                 if (entry.isIntersecting) {
-                    const timer = setTimeout(() => {
-                        element.classList.add('revealed');
-                        pendingTimers.delete(element);
-                    }, getDelay(element));
-                    pendingTimers.set(element, timer);
-                } else {
-                    element.classList.remove('revealed');
+                    const element = entry.target;
+                    observer.unobserve(element);
+                    setTimeout(() => element.classList.add('revealed'), getDelay(element));
                 }
             });
         }, options);
 
         elements.forEach(element => observer.observe(element));
-        return observer;
     }
 
-    // Replay reveal transitions whenever elements re-enter the viewport.
-    observeReplay(revealElements, revealObserverOptions);
+    // Reveal elements once so scrolling away never hides their content again.
+    observeOnce(revealElements, revealObserverOptions);
 
-    // Staggered reveals replay on every visit to the viewport.
-    observeReplay(skillCards, { threshold: 0.1 }, card =>
+    // Keep the staggered entrance while avoiding repeated fades on scroll.
+    observeOnce(skillCards, { threshold: 0.1 }, card =>
         parseFloat(card.style.animationDelay || '0') * 1000
     );
 
-    observeReplay(stepCards, { threshold: 0.1 }, card => {
+    observeOnce(stepCards, { threshold: 0.1 }, card => {
         const step = parseInt(card.dataset.step || '1', 10);
         return (step - 1) * 200;
     });
 
-    observeReplay(diseaseCards, { threshold: 0.1 }, card =>
+    observeOnce(diseaseCards, { threshold: 0.1 }, card =>
         Array.from(diseaseCards).indexOf(card) * 120
     );
 
