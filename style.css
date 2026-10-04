@@ -527,6 +527,12 @@ button:focus-visible {
         left: -0.5rem;
         max-width: 9.5rem;
     }
+    #hero .brutal-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
     #hero .brutal-card {
         padding: 0.75rem;
     }
@@ -559,10 +565,7 @@ button:focus-visible {
         padding-inline: 0.5rem;
     }
     #hero .brutal-btn {
-        display: flex;
-        align-items: center;
         width: 100%;
-        justify-content: center;
     }
     #hero .sticker-chip {
         font-size: 0.7rem;
