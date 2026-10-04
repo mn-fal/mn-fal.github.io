@@ -1,0 +1,571 @@
+/* ========================================
+   Fal Portfolio — Global Styles
+   Neo-Brutalist aesthetic with animations
+   ======================================== */
+
+
+/* ---- Background Pattern ---- */
+
+body {
+    background-color: #E8F3EA;
+    background-image: radial-gradient(#1E5A1E 0.75px, transparent 0.75px), radial-gradient(#6CC95E 0.75px, #E8F3EA 0.75px);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+    color: #1E5A1E;
+}
+
+
+/* ---- Neo-brutalist Interactive States ---- */
+
+.brutal-card {
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brutal-card:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 8px 8px 0px #1E5A1E;
+}
+
+.brutal-btn {
+    transition: all 0.15s ease-out;
+}
+
+.brutal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px #1E5A1E;
+}
+
+.brutal-btn:active {
+    transform: translateY(2px);
+    box-shadow: 1px 1px 0px #1E5A1E;
+}
+
+.sticker-chip {
+    transition: transform 0.2s ease;
+}
+
+.sticker-chip:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+
+/* ---- Animated mobile menu icon ---- */
+
+.menu-icon {
+    position: relative;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.menu-icon span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background-color: #1E5A1E;
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease;
+}
+
+.menu-icon span:nth-child(1) {
+    top: 3px;
+}
+
+.menu-icon span:nth-child(2) {
+    top: 9px;
+}
+
+.menu-icon span:nth-child(3) {
+    top: 15px;
+}
+
+#mobile-menu-btn.is-open .menu-icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+#mobile-menu-btn.is-open .menu-icon span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0.3);
+}
+
+#mobile-menu-btn.is-open .menu-icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+
+/* ---- Splash Screen ---- */
+
+#splash-screen {
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+#splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-leaf {
+    animation: splashPulse 1s ease-in-out infinite alternate;
+}
+
+.splash-text {
+    animation: splashFadeIn 0.8s ease 0.4s forwards;
+}
+
+@keyframes splashPulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15) rotate(8deg);
+    }
+}
+
+@keyframes splashFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---- Fade-in-up entrance animation ---- */
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---- Hero name text reveal ---- */
+
+.hero-name-animate {
+    display: inline-block;
+    padding-right: 0.14em;
+    margin-right: -0.14em;
+    background: linear-gradient(135deg, #7A5C12, #6CC95E);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heroShine 3s ease-in-out infinite alternate;
+}
+
+@keyframes heroShine {
+    0% {
+        background-position: 0% 50%;
+        filter: brightness(1);
+    }
+    100% {
+        background-position: 100% 50%;
+        filter: brightness(1.15);
+    }
+}
+
+
+/* ---- Star spin ---- */
+
+.star-spin {
+    animation: starSpin 12s linear infinite;
+}
+
+@keyframes starSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ---- Floating leaf ---- */
+
+.floating-leaf {
+    animation: floatLeaf 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatLeaf {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(-12px) rotate(8deg);
+    }
+}
+
+
+/* ---- Speech bubble pop ---- */
+
+.speech-bubble-pop {
+    animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s backwards;
+}
+
+@keyframes bubblePop {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-8deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(-4deg);
+    }
+}
+
+
+/* ---- Lets Go Text Bounce ---- */
+
+.letsgo-text {
+    display: inline-block;
+    animation: letsgoWiggle 2s ease-in-out infinite;
+}
+
+@keyframes letsgoWiggle {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    15% {
+        transform: translateY(-3px) rotate(-2deg) scale(1.05);
+    }
+    30% {
+        transform: translateY(1px) rotate(1deg) scale(0.98);
+    }
+    45% {
+        transform: translateY(-2px) rotate(-1deg) scale(1.03);
+    }
+    60% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+}
+
+.letsgo-leaf {
+    display: inline-block;
+    animation: leafSway 1.8s ease-in-out 0.3s infinite;
+}
+
+@keyframes leafSway {
+    0%,
+    100% {
+        transform: rotate(0deg) translateX(0);
+    }
+    25% {
+        transform: rotate(15deg) translateX(2px);
+    }
+    50% {
+        transform: rotate(-5deg) translateX(-1px);
+    }
+    75% {
+        transform: rotate(10deg) translateX(1px);
+    }
+}
+
+
+/* ---- Scroll Reveal ---- */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---- Skill Card Staggered Entry ---- */
+
+.skill-card-stagger {
+    opacity: 0;
+    transform: translateY(30px) rotate(1deg);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skill-card-stagger.revealed {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
+
+/* ---- Step Cards Stagger ---- */
+
+.step-card {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.step-card.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* ---- Disease Cards ---- */
+
+.disease-card {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.disease-card.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* ---- Progress bar animation ---- */
+
+.progress-bar {
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* ---- Nav animate ---- */
+
+.nav-animate {
+    animation: navSlideDown 0.6s ease 1.2s backwards;
+}
+
+@keyframes navSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---- Mobile Menu ---- */
+
+.mobile-menu-enter {
+    animation: menuDrop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-menu-exit {
+    animation: menuLift 0.18s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes menuDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scaleY(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+@keyframes menuLift {
+    from {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        transform-origin: top;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px) scaleY(0.96);
+        transform-origin: top;
+    }
+}
+
+
+/* ---- Scroll-to-top button ---- */
+
+#scroll-top-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* ---- Nav link active state ---- */
+
+.nav-link.active,
+.mobile-nav-link.active {
+    background-color: #FFD60A !important;
+    color: #1E5A1E !important;
+}
+
+
+/* ---- Custom Scrollbar ---- */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #E8F3EA;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6CC95E;
+    border: 2px solid #1E5A1E;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1E5A1E;
+}
+
+
+/* ---- Smooth focus outlines ---- */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #FFD60A;
+    outline-offset: 2px;
+}
+
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .scroll-reveal,
+    .skill-card-stagger,
+    .step-card,
+    .disease-card,
+    .fade-in-up {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+/* ---- Print Styles ---- */
+
+@media print {
+    body {
+        background-image: none !important;
+        background-color: white !important;
+    }
+    #splash-screen,
+    #scroll-top-btn,
+    #mobile-menu-btn,
+    #mobile-menu {
+        display: none !important;
+    }
+    .brutal-card,
+    .brutal-btn {
+        box-shadow: none !important;
+        border-width: 1px !important;
+    }
+}
+
+
+/* ---- Mobile layout refinements ---- */
+
+@media (max-width: 640px) {
+    header {
+        top: 0.5rem !important;
+        padding-inline: 0.75rem;
+    }
+    header nav {
+        width: fit-content;
+        justify-content: flex-start;
+        min-height: 3.5rem;
+        padding-inline: 0.75rem;
+        border-width: 3px;
+        gap: 0.5rem;
+    }
+    #mobile-menu {
+        width: 100%;
+    }
+    #mobile-menu-btn {
+        width: 2.75rem;
+        height: 2.75rem;
+        flex: 0 0 2.75rem;
+    }
+    #mobile-menu a,
+    .brutal-btn {
+        min-height: 2.75rem;
+    }
+    main {
+        padding-top: 1.5rem !important;
+        padding-bottom: 3rem !important;
+    }
+    main.space-y-24> :not([hidden])~ :not([hidden]) {
+        margin-top: 3.5rem;
+    }
+    #hero>div {
+        gap: 2.5rem;
+    }
+    #hero h1 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        line-height: 1.08;
+        overflow-wrap: anywhere;
+    }
+    #hero .speech-bubble-pop {
+        top: -0.75rem;
+        left: -0.5rem;
+        max-width: 9.5rem;
+    }
+    #hero .brutal-card {
+        padding: 0.75rem;
+    }
+    #project>.border-5>.bg-brand-leaf {
+        padding: 1rem;
+    }
+    #project>.border-5>.p-6 {
+        padding: 1rem;
+    }
+    #project .border-4.rounded-3xl.p-6 {
+        padding: 1rem;
+    }
+    #project .bg-white.border-3.rounded-2xl.p-5 {
+        padding: 0.75rem;
+    }
+    #contact>div {
+        padding: 1.5rem;
+    }
+    #scroll-top-btn {
+        right: 1rem;
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+@media (max-width: 360px) {
+    #mobile-nav-tag {
+        display: none;
+    }
+    header nav {
+        padding-inline: 0.5rem;
+    }
+    #hero .brutal-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    #hero .sticker-chip {
+        font-size: 0.7rem;
+    }
+    #contact>div {
+        padding: 1.125rem;
+    }
+}

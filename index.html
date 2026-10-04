@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Muh. Naufal 🌱 | Mobile ML & Computer Vision Developer</title>
+    <meta name="description" content="Portfolio of Muh. Naufal — Informatics student building Android apps with machine learning & computer vision. Creator of Banalea, a smart banana leaf disease detector.">
+
+    <!-- Google Fonts: Playfair Display for headings & Plus Jakarta Sans for body -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            leaf: '#6CC95E',
+                            dark: '#1E5A1E',
+                            yellow: '#FFD60A',
+                            olive: '#7A5C12',
+                            pink: '#FFE3E3',
+                            mint: '#E8F3EA',
+                            lightMint: '#F3FAF4',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    borderWidth: {
+                        '3': '3px',
+                        '4': '4px',
+                        '5': '5px',
+                    },
+                    boxShadow: {
+                        'hard-sm': '3px 3px 0px #1E5A1E',
+                        'hard-md': '5px 5px 0px #1E5A1E',
+                        'hard-lg': '8px 8px 0px #1E5A1E',
+                        'hard-xl': '10px 10px 0px #1E5A1E',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans antialiased selection:bg-brand-yellow selection:text-brand-dark min-h-screen relative overflow-x-hidden">
+
+    <!-- BEGIN: Page Load Splash Animation -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-brand-dark flex items-center justify-center transition-opacity duration-700">
+        <div class="text-center space-y-4">
+            <div class="splash-leaf text-6xl sm:text-8xl">🌱</div>
+            <p class="splash-text font-black text-brand-yellow text-xl sm:text-2xl tracking-tight opacity-0">Muh. Naufal</p>
+        </div>
+    </div>
+
+    <!-- BEGIN: Floating Navigation -->
+    <header class="sticky top-4 z-50 px-4 nav-animate">
+        <nav class="max-w-4xl mx-auto bg-white/95 backdrop-blur-md border-4 border-brand-dark rounded-full px-4 py-2.5 shadow-hard-md flex items-center justify-between gap-2">
+            <!-- Logo Pill -->
+            <a aria-label="Muh. Naufal Home" class="flex items-center gap-2 group px-3 py-1 bg-brand-lightMint border-3 border-brand-dark rounded-full shadow-hard-sm" href="#hero">
+                <span class="text-lg">💻</span>
+                <span class="font-black text-brand-dark tracking-tight text-base group-hover:text-brand-olive transition-colors">Muh. Naufal</span>
+            </a>
+
+            <span id="mobile-nav-tag" class="inline-flex md:hidden items-center rounded-full border-2 border-brand-dark px-2 py-1 text-[0.65rem] font-black text-brand-dark whitespace-nowrap">Portofolio</span>
+
+            <!-- Navigation Links (Desktop) -->
+            <div class="hidden md:flex items-center gap-1.5 font-bold text-sm">
+                <a class="nav-link px-4 py-1.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-pink shadow-hard-sm transition-all" href="#about">About</a>
+                <a class="nav-link px-4 py-1.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-yellow shadow-hard-sm transition-all" href="#skills">Skills</a>
+                <a class="nav-link px-4 py-1.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-leaf hover:text-white shadow-hard-sm transition-all" href="#project">Project</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 bg-brand-lightMint border-3 border-brand-dark rounded-full shadow-hard-sm" aria-label="Toggle Menu" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="menu-icon" id="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+
+            <!-- Action Button -->
+            <div class="hidden md:block">
+                <a class="brutal-btn inline-flex items-center gap-1.5 bg-brand-yellow text-brand-dark font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full border-3 border-brand-dark shadow-hard-sm shrink-0 whitespace-nowrap" href="#contact">
+                    <span class="leading-none">Contact Me</span>
+                    <span class="inline-block animate-bounce leading-none">👋</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="md:hidden max-w-4xl mx-auto mt-2 bg-white/95 backdrop-blur-md border-4 border-brand-dark rounded-2xl px-4 py-4 shadow-hard-md hidden mobile-menu-enter">
+            <div class="flex flex-col gap-2 font-bold text-sm">
+                <a class="mobile-nav-link px-4 py-2.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-pink shadow-hard-sm transition-all text-center" href="#about">About</a>
+                <a class="mobile-nav-link px-4 py-2.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-yellow shadow-hard-sm transition-all text-center" href="#skills">Skills</a>
+                <a class="mobile-nav-link px-4 py-2.5 rounded-full border-2 border-brand-dark bg-white font-extrabold text-brand-dark hover:bg-brand-leaf hover:text-white shadow-hard-sm transition-all text-center" href="#project">Project</a>
+                <a class="brutal-btn inline-flex items-center justify-center gap-1.5 bg-brand-yellow text-brand-dark font-extrabold text-sm px-4 py-2.5 rounded-full border-3 border-brand-dark shadow-hard-sm" href="#contact">
+                    <span class="leading-none">Contact Me</span>
+                    <span class="inline-block animate-bounce leading-none">👋</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- END: Floating Navigation -->
+
+    <!-- BEGIN: MainContent -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-20 space-y-24">
+
+        <!-- BEGIN: Hero Section -->
+        <section class="pt-6 sm:pt-12 scroll-mt-28" id="hero">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- Hero Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <!-- Badge -->
+                    <div class="fade-in-up inline-flex items-center gap-2 px-4 py-1.5 bg-white border-3 border-brand-dark rounded-full shadow-hard-sm text-xs sm:text-sm font-black text-brand-dark">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-yellow border-2 border-brand-dark animate-pulse"></span>
+                        <span>🇮🇩 Informatics Student • Mobile ML Developer</span>
+                    </div>
+
+                    <!-- Main Catchy Title -->
+                    <div class="space-y-2">
+                        <h1 class="fade-in-up font-serif italic font-black text-3xl sm:text-5xl lg:text-6xl text-brand-olive tracking-tight leading-none" style="animation-delay: 0.1s;">
+                            <span class="block sm:inline">Hi, I'm</span>
+                            <span class="inline-block hero-name-animate">Muh. Naufal!</span>
+                        </h1>
+                        <p class="fade-in-up text-lg sm:text-xl font-bold text-brand-dark/90 leading-relaxed max-w-xl" style="animation-delay: 0.2s;">
+                            Informatics student building Android apps that can see — using machine learning &amp; computer vision.
+                        </p>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="fade-in-up flex flex-wrap items-center gap-4 pt-2" style="animation-delay: 0.3s;">
+                        <a class="brutal-btn bg-brand-yellow text-brand-dark font-black text-base px-7 py-3.5 rounded-full border-4 border-brand-dark shadow-hard-md hover:bg-yellow-300" href="#project">
+              See My Project 🔍
+            </a>
+                        <a class="brutal-btn bg-white text-brand-dark font-black text-base px-7 py-3.5 rounded-full border-4 border-brand-dark shadow-hard-md hover:bg-brand-pink" href="#contact">
+              Contact Me ✉️
+            </a>
+                        <a class="brutal-btn bg-brand-lightMint text-brand-dark font-black text-base px-7 py-3.5 rounded-full border-4 border-brand-dark shadow-hard-md hover:bg-brand-leaf" href="CV%20Resume%20Desain%20Grafis%20Memphis%20Warna%20Warni.pdf" target="_blank" rel="noopener noreferrer">
+                            Lihat CV 📄
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats Ribbon -->
+                    <div class="fade-in-up pt-4 flex flex-wrap gap-2.5 text-xs sm:text-sm font-extrabold" style="animation-delay: 0.4s;">
+                        <span class="sticker-chip bg-white border-3 border-brand-dark rounded-full px-4 py-2 shadow-hard-sm">🎯
+              3,500+ Dataset</span>
+                        <span class="sticker-chip bg-white border-3 border-brand-dark rounded-full px-4 py-2 shadow-hard-sm">⚡
+              &lt;120ms Inference</span>
+                        <span class="sticker-chip bg-white border-3 border-brand-dark rounded-full px-4 py-2 shadow-hard-sm">📱
+              Offline-First</span>
+                    </div>
+                </div>
+
+                <!-- Hero Avatar Card & Cartoon Sidekick -->
+                <div class="lg:col-span-5 relative flex justify-center items-center fade-in-up" style="animation-delay: 0.3s;">
+                    <!-- Star Accent Deco -->
+                    <div class="absolute -top-6 right-6 z-10 text-brand-yellow text-4xl select-none star-spin">★</div>
+
+                    <!-- Avatar Frame Container -->
+                    <div class="relative bg-white border-4 border-brand-dark rounded-3xl p-4 shadow-hard-lg max-w-sm w-full brutal-card">
+                        <!-- Speech Bubble Sticker anchored to the profile frame -->
+                        <div class="absolute -top-4 -left-4 sm:-top-4 sm:-left-6 z-20 bg-brand-pink border-3 border-brand-dark px-4 py-2 rounded-2xl rounded-bl-none shadow-hard-sm rotate-[-4deg] max-w-[190px] speech-bubble-pop">
+                            <p class="font-extrabold text-xs text-brand-dark leading-tight">
+                                <span class="letsgo-text">Lets Gooo!</span> <span class="letsgo-leaf">🍃</span>
+                            </p>
+                        </div>
+
+                        <div class="overflow-hidden rounded-2xl border-3 border-brand-dark bg-brand-lightMint aspect-square relative">
+                            <img alt="Foto Muh. Naufal mengenakan topeng Spider-Man" class="w-full h-full object-cover object-center" loading="eager" src="Screenshot%202026-10-03%20143734.png">
+                        </div>
+                        <!-- Card Bottom Tag -->
+                        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs font-black">
+                            <span class="bg-brand-yellow border-2 border-brand-dark px-3 py-1 rounded-full">Muh. Naufal 👨‍💻</span>
+                            <span class="text-brand-dark/70">UNAMIN Informatics 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Hero Section -->
+
+        <!-- BEGIN: About Me Section -->
+        <section class="scroll-mt-24 space-y-6 scroll-reveal" id="about">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl p-2 bg-brand-yellow border-3 border-brand-dark rounded-2xl shadow-hard-sm">🌱</span>
+                <h2 class="font-serif italic font-black text-3xl sm:text-4xl text-brand-olive">About Me</h2>
+            </div>
+
+            <!-- Large Speech-Bubble Shaped Card -->
+            <div class="border-4 border-brand-dark shadow-hard-lg bg-[#FFE3E3]/40 p-6 sm:p-10 rounded-3xl relative">
+                <div class="max-w-3xl space-y-5">
+                    <p class="font-extrabold text-xl sm:text-2xl text-brand-dark">3rd Year Informatics Engineering Student at Universitas Muhammadiyah Sorong (UNAMIN) 🎓</p>
+                    <p class="text-base sm:text-lg font-medium text-brand-dark/90 leading-relaxed">
+                        I'm a third-year Informatics Engineering student at Universitas Muhammadiyah Sorong (UNAMIN), focused on Android development and machine learning for image classification. I build apps that run the model directly on the phone, so they keep working in
+                        places with no internet, which is the everyday reality for many farms and villages in Papua Barat Daya.
+                    </p>
+                    <p class="text-base sm:text-lg font-medium text-brand-dark/90 leading-relaxed">
+                        My main project, Banalea, detects banana leaf diseases such as Sigatoka, Cordana, and Pestalotiopsis from a single photo, so farmers can catch problems early without waiting for an expert.
+                    </p>
+
+                    <!-- Quick Highlight Sticker Chips -->
+                    <div class="pt-4 flex flex-wrap gap-3">
+                        <span class="sticker-chip bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-bold text-xs sm:text-sm shadow-hard-sm">📍
+              Sorong, Papua Barat Daya</span>
+                        <span class="sticker-chip bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-bold text-xs sm:text-sm shadow-hard-sm">🚀
+              Open Source Contributor</span>
+                    </div>
+                </div>
+
+                <!-- Decorative Mini Cartoon Leaf in Corner -->
+                <div class="hidden sm:block absolute right-6 bottom-6 text-5xl opacity-40 select-none pointer-events-none floating-leaf">
+                    🍃</div>
+            </div>
+        </section>
+        <!-- END: About Me Section -->
+
+        <!-- BEGIN: Skills Cartoon Shelves Section -->
+        <section class="scroll-mt-24 space-y-8 scroll-reveal" id="skills">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl p-2 bg-brand-leaf/40 border-3 border-brand-dark rounded-2xl shadow-hard-sm">🧰</span>
+                <div>
+                    <h2 class="font-serif italic font-black text-3xl sm:text-4xl text-brand-olive">Skills &amp; Tech Arsenal</h2>
+                    <p class="text-xs sm:text-sm font-bold text-brand-dark/80">Every tool tested in the field and compiled on real devices
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Shelf 1: Mobile (Android) -->
+                <div class="bg-white border-4 border-brand-dark rounded-3xl p-6 shadow-hard-md flex flex-col justify-between relative brutal-card skill-card-stagger" style="animation-delay: 0s;">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between border-b-3 border-brand-dark pb-3">
+                            <span class="font-serif italic font-black text-xl text-brand-olive">Mobile (Android)</span>
+                            <span class="text-2xl">📱</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-lightMint font-black text-xs shadow-hard-sm">Kotlin</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-yellow font-black text-xs shadow-hard-sm">CameraX</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-pink font-bold text-xs shadow-hard-sm">Android
+                Studio</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 h-3 bg-[#D4A373] border-3 border-brand-dark rounded-full shadow-sm"></div>
+                </div>
+
+                <!-- Shelf 2: AI / ML & Computer Vision -->
+                <div class="bg-white border-4 border-brand-dark rounded-3xl p-6 shadow-hard-md flex flex-col justify-between relative brutal-card skill-card-stagger" style="animation-delay: 0.15s;">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between border-b-3 border-brand-dark pb-3">
+                            <span class="font-serif italic font-black text-xl text-brand-olive">AI / ML &amp; Vision</span>
+                            <span class="text-2xl">🧠</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-yellow font-black text-xs shadow-hard-sm">TensorFlow
+                Lite</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-leaf/30 font-black text-xs shadow-hard-sm">MobileNetV4</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">ResNet50</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">OpenCV</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">PyTorch</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-pink font-bold text-xs shadow-hard-sm">Image
+                Classification</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">Transfer
+                Learning</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 h-3 bg-[#D4A373] border-3 border-brand-dark rounded-full shadow-sm"></div>
+                </div>
+
+                <!-- Shelf 3: Tools & Ecosystem -->
+                <div class="bg-white border-4 border-brand-dark rounded-3xl p-6 shadow-hard-md flex flex-col justify-between relative brutal-card skill-card-stagger" style="animation-delay: 0.3s;">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between border-b-3 border-brand-dark pb-3">
+                            <span class="font-serif italic font-black text-xl text-brand-olive">Tools &amp; Pipeline</span>
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">Git
+                &amp; GitHub</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-pink font-black text-xs shadow-hard-sm">Figma</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">Google
+                Cloud</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-yellow font-bold text-xs shadow-hard-sm">Weights
+                &amp; Biases</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-brand-lightMint font-bold text-xs shadow-hard-sm">Google
+                Colab</span>
+                            <span class="sticker-chip px-3 py-1.5 rounded-full border-3 border-brand-dark bg-white font-bold text-xs shadow-hard-sm">Gradle
+                Kotlin DSL</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 h-3 bg-[#D4A373] border-3 border-brand-dark rounded-full shadow-sm"></div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Skills Cartoon Shelves Section -->
+
+        <!-- BEGIN: Featured Project Banalea Section -->
+        <section class="scroll-mt-24 space-y-8 scroll-reveal" id="project">
+            <!-- Big Project Feature Box -->
+            <div class="border-5 border-brand-dark rounded-3xl bg-white shadow-hard-xl overflow-hidden">
+                <!-- Bright Green Header Banner -->
+                <div class="bg-brand-leaf border-b-4 border-brand-dark p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="inline-flex items-center gap-1.5 bg-brand-yellow border-3 border-brand-dark px-3 py-0.5 rounded-full text-xs font-black text-brand-dark mb-2">
+                            ⭐ FLAGSHIP INNOVATION 2024
+                        </div>
+                        <h3 class="font-serif italic font-black text-3xl sm:text-5xl text-brand-dark tracking-tight">
+                            Banalea — Smart Banana Leaf Disease Detector
+                        </h3>
+                        <p class="text-brand-dark font-extrabold text-base sm:text-lg">
+                            Instant on-device diagnostic camera classifying Sigatoka, Cordana, Pestalotiopsis, and Healthy banana foliage in milliseconds.
+                        </p>
+                    </div>
+                    <div class="shrink-0 flex items-center gap-2">
+                        <span class="bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-black text-xs sm:text-sm shadow-hard-sm">
+              Offline-First ⚡
+            </span>
+                    </div>
+                </div>
+
+                <!-- Project Details Body -->
+                <div class="p-6 sm:p-10 space-y-10">
+                    <!-- Role & Specs Banner -->
+                    <div class="p-5 bg-brand-lightMint border-3 border-brand-dark rounded-2xl shadow-hard-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <span class="text-xs uppercase tracking-wider font-black text-brand-olive">My Role:</span>
+                            <p class="font-bold text-sm sm:text-base text-brand-dark">
+                                Lead Mobile Developer &amp; ML Engineer — collected 3,500+ agricultural leaf dataset, trained dual MobileNetV4 &amp; ResNet50 pipelines, optimized with TFLite for latency under 120ms on low-cost devices.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="bg-brand-yellow px-3 py-1.5 border-2 border-brand-dark rounded-lg text-xs font-black">Latency:
+                ~118ms</span>
+                            <span class="bg-white px-3 py-1.5 border-2 border-brand-dark rounded-lg text-xs font-black">Model Size:
+                4.2 MB</span>
+                        </div>
+                    </div>
+
+                    <!-- 3-Step Cartoon Flow -->
+                    <div class="space-y-4">
+                        <h4 class="font-serif italic font-black text-2xl text-brand-olive flex items-center gap-2">
+                            <span>How It Works In The Field</span>
+                            <span class="text-sm font-sans font-bold bg-brand-pink border-2 border-brand-dark px-2.5 py-0.5 rounded-full">3
+                Easy Steps</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <!-- Step 1 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-[#FFF9DB] shadow-hard-sm relative brutal-card step-card" data-step="1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-9 h-9 rounded-full bg-brand-dark text-brand-yellow font-black flex items-center justify-center border-2 border-brand-dark text-base shrink-0">
+                                        01</div>
+                                    <h5 class="font-black text-lg text-brand-dark leading-tight">Take a Photo</h5>
+                                </div>
+                                <p class="text-sm font-semibold text-brand-dark/80 mt-1">Snap the affected leaf with CameraX auto-guide frame and real-time lighting detection.</p>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-brand-lightMint shadow-hard-sm relative brutal-card step-card" data-step="2">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-9 h-9 rounded-full bg-brand-dark text-brand-yellow font-black flex items-center justify-center border-2 border-brand-dark text-base shrink-0">
+                                        02</div>
+                                    <h5 class="font-black text-lg text-brand-dark leading-tight">On-Device Inference</h5>
+                                </div>
+                                <p class="text-sm font-semibold text-brand-dark/80 mt-1">Dual MobileNetV4 &amp; ResNet50 run instant inference on-device without needing internet connection.</p>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-brand-pink/50 shadow-hard-sm relative brutal-card step-card" data-step="3">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-9 h-9 rounded-full bg-brand-dark text-brand-yellow font-black flex items-center justify-center border-2 border-brand-dark text-base shrink-0">
+                                        03</div>
+                                    <h5 class="font-black text-lg text-brand-dark leading-tight">Instant Results</h5>
+                                </div>
+                                <p class="text-sm font-semibold text-brand-dark/80 mt-1">Get high-confidence diagnosis, severity score, and practical local organic remedy suggestions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Disease Character Cards -->
+                    <div class="space-y-4">
+                        <h4 class="font-serif italic font-black text-2xl text-brand-olive">
+                            Classified Botanical Pathology
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Card 1 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-white shadow-hard-sm space-y-2 flex flex-col items-center text-center justify-center brutal-card disease-card">
+                                <span class="text-3xl mb-1">🍂</span>
+                                <h6 class="font-black text-base text-brand-dark">Black Sigatoka</h6>
+                                <p class="text-xs font-semibold text-brand-dark/70 text-center">
+                                    Dark streaks along leaf veins caused by <span class="italic">Pseudocercospora fijiensis</span>.
+                                </p>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-white shadow-hard-sm space-y-2 flex flex-col items-center text-center justify-center brutal-card disease-card">
+                                <span class="text-3xl mb-1">⭕</span>
+                                <h6 class="font-black text-base text-brand-dark">Cordana Leaf Spot</h6>
+                                <p class="text-xs font-semibold text-brand-dark/70 text-center">
+                                    Large oval spots with pale grayish center and bright reddish-brown border margins.
+                                </p>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-white shadow-hard-sm space-y-2 flex flex-col items-center text-center justify-center brutal-card disease-card">
+                                <span class="text-3xl mb-1">🥀</span>
+                                <h6 class="font-black text-base text-brand-dark">Pestalotiopsis</h6>
+                                <p class="text-xs font-semibold text-brand-dark/70 text-center">
+                                    Necrotic spreading lesions starting from leaf tips, commonly caused by humidity distress.
+                                </p>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="border-3 border-brand-dark rounded-2xl p-5 bg-white shadow-hard-sm space-y-2 flex flex-col items-center text-center justify-center brutal-card disease-card">
+                                <span class="text-3xl mb-1">🌿</span>
+                                <h6 class="font-black text-base text-brand-dark">Healthy Foliage (Sehat)</h6>
+                                <p class="text-xs font-semibold text-brand-dark/70 text-center">
+                                    Vibrant emerald green surface with intact parallel veins and optimal photosynthetic rate.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Mobile Demo Simulation Widget -->
+                    <div class="border-4 border-brand-dark rounded-3xl p-6 bg-brand-mint/60 shadow-hard-md">
+                        <div class="max-w-2xl mx-auto space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="font-black text-sm text-brand-dark uppercase tracking-wide">Live Classifier UI
+                  Preview</span>
+                                <span class="inline-flex items-center gap-1.5 text-xs font-extrabold bg-green-200 text-brand-dark border-2 border-brand-dark px-2.5 py-0.5 rounded-full">
+                  <span class="w-2 h-2 rounded-full bg-green-600 animate-ping"></span> Active Inference
+                                </span>
+                            </div>
+
+                            <!-- Mock Screen Surface -->
+                            <div class="bg-white border-3 border-brand-dark rounded-2xl p-5 shadow-hard-sm space-y-4">
+                                <div class="flex flex-col md:flex-row items-center justify-center gap-6 p-2">
+                                    <div class="w-full max-w-[260px] shrink-0 border-4 border-brand-dark rounded-3xl overflow-hidden shadow-hard-md bg-white">
+                                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXwOx47DzvyTVlCsqrAEWabYUQTsFqHlsCCxnq3DamqXa-_HmZB8rTZoTXWkCgkPDVv_wjfUsJ38h6o1nrxP2R8vklGTP9qzoaBhfwMuna8cp5AQol1RhSdMGlMCKTjCTArNTUhD1fqIabbDKq2SaaMq76VRuh74PwprPrUGkECktPesbOZEENAgUOhwbf1i2BHmYqJEZ_7Ig5kVWx03ysuAPTUkCDe8BNjTKkGV3UyhPEiQ4_P1Xfw9SLLtXlU7LeI1E"
+                                            alt="Banalea Hasil Pemindaian Mobile Screen" class="w-full h-auto object-contain block" loading="lazy">
+                                    </div>
+
+                                    <div class="space-y-4 w-full text-left">
+                                        <div class="inline-flex items-center gap-2 bg-green-100 border-2 border-brand-dark px-3 py-1 rounded-full text-xs font-black text-green-800">
+                                            <span class="w-2 h-2 rounded-full bg-green-600 animate-pulse"></span> Real App Output: Hasil Pemindaian
+                                        </div>
+
+                                        <div class="space-y-1.5">
+                                            <h5 class="font-serif italic font-black text-xl sm:text-2xl text-brand-olive">Daun Sehat (Healthy Leaf)
+                                            </h5>
+                                            <p class="text-xs sm:text-sm font-bold text-brand-dark/80 leading-relaxed">On-device dual-backbone inference verifies healthy banana foliage with high confidence directly from field camera scans without network overhead.</p>
+                                        </div>
+
+                                        <!-- Animated Progress Bars -->
+                                        <div class="space-y-2.5 pt-1">
+                                            <div>
+                                                <div class="flex justify-between text-xs font-black text-brand-dark mb-1">
+                                                    <span>MobileNetV4 Confidence</span>
+                                                    <span class="text-brand-dark font-extrabold counter" data-target="98">0%</span>
+                                                </div>
+                                                <div class="w-full h-3 bg-gray-200 rounded-full border-2 border-brand-dark overflow-hidden">
+                                                    <div class="h-full bg-brand-leaf rounded-full progress-bar" data-width="98" style="width: 0%;"></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="flex justify-between text-xs font-bold text-brand-dark/70 mb-1">
+                                                    <span>ResNet50 Cross-Validation</span>
+                                                    <span class="counter" data-target="61">0%</span>
+                                                </div>
+                                                <div class="w-full h-2.5 bg-gray-200 rounded-full border-2 border-brand-dark overflow-hidden">
+                                                    <div class="h-full bg-brand-yellow rounded-full progress-bar" data-width="61" style="width: 0%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-brand-pink/60 border-2 border-brand-dark rounded-xl p-3 text-xs font-bold text-brand-dark flex items-start gap-2.5">
+                                            <span class="text-base shrink-0">📋</span>
+                                            <div><strong class="font-black">Rekomendasi Petani:</strong> Tanaman dalam kondisi baik. Pertahankan kondisi lingkungan dan rutinitas perawatan yang sudah dilakukan.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Featured Project Banalea Section -->
+
+        <!-- BEGIN: Contact Section -->
+        <section class="scroll-mt-24 scroll-reveal" id="contact">
+            <div class="relative bg-brand-pink border-4 border-brand-dark shadow-hard-xl rounded-3xl p-8 sm:p-14 overflow-hidden">
+                <!-- Peeking Mascot Background / Accent -->
+                <div class="absolute -top-8 -right-8 w-36 h-36 opacity-30 select-none pointer-events-none rotate-12 floating-leaf">
+                    🍃</div>
+
+                <div class="max-w-2xl space-y-6 relative z-10">
+                    <div class="inline-block bg-white border-3 border-brand-dark px-4 py-1 rounded-full text-xs font-black shadow-hard-sm">
+                        📫 INBOX IS ALWAYS OPEN
+                    </div>
+                    <h2 class="font-serif italic font-black text-3xl sm:text-5xl text-brand-olive leading-tight">
+                        Got an exciting project or want to collaborate?
+                    </h2>
+                    <p class="text-base sm:text-lg font-bold text-brand-dark leading-relaxed">
+                        Whether you want to chat about Computer Vision, Android development, or swap farming tech ideas, my inbox is always open!
+                    </p>
+
+                    <!-- Social Sticker Badges -->
+                    <div class="pt-6 flex flex-wrap gap-3">
+                        <a class="sticker-chip flex items-center gap-2 bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-bold text-xs sm:text-sm shadow-hard-sm hover:bg-brand-lightMint" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=muhammadnaufal3019%40gmail.com"
+                            target="_blank" rel="noopener noreferrer">
+                            <span>✉️</span><span>muhammadnaufal3019@gmail.com</span>
+                        </a>
+                        <a aria-label="Buka profil GitHub SIP142 di tab baru" class="sticker-chip flex items-center gap-2 bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-bold text-xs sm:text-sm shadow-hard-sm hover:bg-brand-lightMint" href="https://github.com/SIP142" rel="noopener noreferrer" target="_blank">
+                            <svg aria-hidden="true" class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.74.08-.74 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.62-2.8 5.64-5.48 5.94.43.37.81 1.1.81 2.22v3.3c0 .32.22.69.83.57A12 12 0 0 0 12 .5Z"></path>
+                            </svg>
+                            <span>SIP142</span>
+                        </a>
+                        <a class="sticker-chip flex items-center gap-2 bg-white border-3 border-brand-dark rounded-full px-4 py-2 font-bold text-xs sm:text-sm shadow-hard-sm hover:bg-brand-lightMint" href="https://instagram.com/_mn.pal" rel="noopener noreferrer" target="_blank"
+                            aria-label="Instagram @_mn.pal">
+                            <svg aria-hidden="true" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"></circle>
+                            </svg>
+                            <span>@_mn.pal</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Contact Section -->
+
+    </main>
+    <!-- END: MainContent -->
+
+    <!-- BEGIN: Scroll-to-Top Button -->
+    <button id="scroll-top-btn" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-brand-yellow border-3 border-brand-dark rounded-full shadow-hard-md flex items-center justify-center text-brand-dark font-black text-xl opacity-0 pointer-events-none transition-all duration-300 hover:scale-110"
+        aria-label="Scroll to top">
+    ↑
+  </button>
+
+    <!-- BEGIN: MainFooter -->
+    <footer class="border-t-4 border-brand-dark bg-white py-8 px-4 text-center">
+        <div class="max-w-4xl mx-auto space-y-3">
+            <p class="font-extrabold text-xs sm:text-sm text-brand-dark">
+                Handcrafted with 💚, Kotlin, and lots of Bananas • Made in Indonesia by Muh. Naufal
+            </p>
+            <p class="text-xs text-brand-dark/60 font-semibold">
+                © 2026 Muh. Naufal. All leaf pixels safely quantized.
+            </p>
+        </div>
+    </footer>
+    <!-- END: MainFooter -->
+
+    <!-- Custom JS for interactions -->
+    <script src="script.js"></script>
+</body>
+
+</html>
