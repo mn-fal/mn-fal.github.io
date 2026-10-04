@@ -138,6 +138,11 @@ body {
 /* ---- Fade-in-up entrance animation ---- */
 
 .fade-in-up {
+    opacity: 1;
+    transform: none;
+}
+
+body.intro-started .fade-in-up {
     opacity: 0;
     transform: translateY(24px);
     animation: fadeInUp 0.7s ease forwards;
@@ -211,7 +216,11 @@ body {
 /* ---- Speech bubble pop ---- */
 
 .speech-bubble-pop {
-    animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s backwards;
+    opacity: 1;
+}
+
+body.intro-started .speech-bubble-pop {
+    animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s backwards;
 }
 
 @keyframes bubblePop {
@@ -340,7 +349,11 @@ body {
 /* ---- Nav animate ---- */
 
 .nav-animate {
-    animation: navSlideDown 0.6s ease 1.2s backwards;
+    opacity: 1;
+}
+
+body.intro-started .nav-animate {
+    animation: navSlideDown 0.6s ease forwards;
 }
 
 @keyframes navSlideDown {
